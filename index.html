@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portrait Art Gallery</title>
+  <style>
+    /* Reset & Base Styles */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #222;
+      background-color: #fcfcfc;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #eee;
+      padding: 2rem 1.25rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    .tagline {
+      color: #666;
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+    }
+
+    /* Gallery Grid */
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid #222;
+      display: inline-block;
+      padding-bottom: 0.2rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .gallery-card {
+      background: #fff;
+      border: 1px solid #e2e2e2;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+      background-color: #f0f0f0;
+    }
+
+    .card-info {
+      padding: 0.8rem 1rem;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .card-medium {
+      color: #666;
+      font-size: 0.85rem;
+    }
+
+    /* About & Contact */
+    .about-text {
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-box {
+      margin-top: 1rem;
+    }
+
+    .btn-mailto {
+      display: inline-block;
+      padding: 0.8rem 1.4rem;
+      background-color: #222;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    /* Lightbox Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.88);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .lightbox-content {
+      max-width: 95%;
+      max-height: 80vh;
+      border-radius: 4px;
+    }
+
+    #lightbox-caption {
+      color: #ddd;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      color: #fff;
+      font-size: 36px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Fine Art & Portraiture</h1>
+    <p class="tagline">Traditional Charcoal, Graphite & Acrylic Commissions</p>
+  </header>
+
+  <main>
+    <!-- Gallery Section -->
+    <section class="container">
+      <h2>Portrait Gallery</h2>
+      <div class="gallery-grid">
+
+        <!-- Sample Item 1 -->
+        <div class="gallery-card" onclick="openLightbox('https://via.placeholder.com/600x800.png?text=Portrait+Study+1', 'Charcoal Study - 11x14')">
+          <img src="https://via.placeholder.com/400x500.png?text=Portrait+Study+1" alt="Portrait Study 1">
+          <div class="card-info">
+            <div class="card-title">Portrait Study I</div>
+            <div class="card-medium">Charcoal on Canvas</div>
+          </div>
+        </div>
+
+        <!-- Sample Item 2 -->
+        <div class="gallery-card" onclick="openLightbox('https://via.placeholder.com/600x800.png?text=Portrait+Study+2', 'Graphite Portrait - 9x12')">
+          <img src="https://via.placeholder.com/400x500.png?text=Portrait+Study+2" alt="Portrait Study 2">
+          <div class="card-info">
+            <div class="card-title">Portrait Study II</div>
+            <div class="card-medium">Graphite on Paper</div>
+          </div>
+        </div>
+
+        <!-- Sample Item 3 -->
+        <div class="gallery-card" onclick="openLightbox('https://via.placeholder.com/600x800.png?text=Portrait+Study+3', 'Acrylic Portrait - 16x20')">
+          <img src="https://via.placeholder.com/400x500.png?text=Portrait+Study+3" alt="Portrait Study 3">
+          <div class="card-info">
+            <div class="card-title">Portrait Study III</div>
+            <div class="card-medium">Acrylic on Canvas</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="container">
+      <h2>About & Mediums</h2>
+      <p class="about-text">
+        Specializing in custom traditional portraiture focusing on form, value, and character capture. 
+        Commissions are available upon request for individuals and families.
+      </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="container">
+      <h2>Inquiries & Commissions</h2>
+      <p>To request a commission or inquire about current pricing and turnaround times, send an email directly:</p>
+      <div class="contact-box">
+        <a href="mailto:your-email@example.com?subject=Portrait%20Inquiry" class="btn-mailto">
+          Send Email Inquiry
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox Viewer Modal -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="close-btn">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" alt="Enlarged view">
+    <div id="lightbox-caption"></div>
+  </div>
+
+  <footer>
+    <p>&copy; Portrait Art Gallery. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function openLightbox(src, caption) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').innerText = caption;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
